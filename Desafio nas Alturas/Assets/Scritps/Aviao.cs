@@ -8,15 +8,27 @@ public class Aviao : MonoBehaviour
     [SerializeField]
     private float forca = 10f;
 
+    [SerializeField]
+
+    private Diretor diretor;
+
     private void Awake()
     {
         Debug.Log("Acordei");
         this.fisica = GetComponent<Rigidbody2D>();
+        diretor = GameObject.FindObjectOfType<Diretor>();
     }
 
     private void Impulsionar()
     {
+        this.fisica.velocity = Vector2.zero;
         this.fisica.AddForce(Vector2.up * forca, ForceMode2D.Impulse);
+    }
+
+    private void OnCollisionEnter2D(Collision2D colisao)
+    {
+        fisica.simulated = false;
+        diretor.FinalizarJogo();
     }
 
     // Update is called once per frame
