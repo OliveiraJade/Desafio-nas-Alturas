@@ -9,6 +9,9 @@ public class Diretor : MonoBehaviour
 
     private Aviao aviao;
 
+    private Pontuacao pontuacao;
+
+ 
     public void FinalizarJogo()
     {
         Time.timeScale = 0;
@@ -19,6 +22,8 @@ public class Diretor : MonoBehaviour
     void Start()
         {
             aviao = GameObject.FindObjectOfType<Aviao>();
+            pontuacao = GameObject.FindObjectOfType<Pontuacao>();
+        
         }
 
     public void ReiniciarJogo()
@@ -26,6 +31,7 @@ public class Diretor : MonoBehaviour
         aviao.Reiniciar();
         imagemGameOver.SetActive(false);
         Time.timeScale = 1;
+        pontuacao.Reiniciar();
         DestruirObstaculos();
         Debug.Log("Reiniciou");
     }

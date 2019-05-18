@@ -1,18 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Pontuacao : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+
+    private Text textoPontuacao;
+
+    private int pontos;
+
+    private AudioSource somPontuacao;
+
+    private void Awake()
     {
-        
+        somPontuacao = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AdicionarPontos()
     {
-        
+        pontos += 1;
+        somPontuacao.Play();
+        AtualizarTexto();
+    }
+      
+    private void AtualizarTexto()
+    {
+        textoPontuacao.text = pontos.ToString();
+    }
+
+    public void Reiniciar()
+    {
+        pontos = 0;
+        AtualizarTexto();
     }
 }

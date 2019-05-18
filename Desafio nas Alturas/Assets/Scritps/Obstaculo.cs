@@ -10,6 +10,18 @@ public class Obstaculo : MonoBehaviour
 
     private float variacaoDaPosicaoY;
 
+    private Vector3 posicaoAviao;
+
+    private Pontuacao pontuacao;
+
+    private bool pontuei;
+
+    private void Start()
+    {
+        posicaoAviao = GameObject.FindObjectOfType<Aviao>().transform.position;
+        pontuacao = GameObject.FindObjectOfType<Pontuacao>();
+    }
+
     private void Awake()
     {
         transform.Translate(Vector3.up * Random.Range(-variacaoDaPosicaoY, variacaoDaPosicaoY));
@@ -18,6 +30,11 @@ public class Obstaculo : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.left * velocidade);
+        if (!pontuei && this.transform.position.x < posicaoAviao.x)
+        {
+            pontuei = true;
+            pontuacao.AdicionarPontos();
+        }   
     }
 
     private void OnTriggerEnter2D(Collider2D outro)
